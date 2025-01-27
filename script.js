@@ -64,4 +64,19 @@ document.addEventListener("DOMContentLoaded", function() {
     // Limpiar el formulario después de agregar
     form.reset();
   });
+
+  // Función para guardar los registros
+  document.getElementById("saveButton").addEventListener("click", function() {
+    const data = document.getElementById("attendanceTable").outerHTML;
+    const blob = new Blob([data], { type: "application/octet-stream" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "registro_asistencia_noviembre_2024.html";
+    link.click();
+  });
+
+  // Función para imprimir el registro
+  document.getElementById("printButton").addEventListener("click", function() {
+    window.print();
+  });
 });
