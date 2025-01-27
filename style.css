@@ -11,6 +11,8 @@ body {
   background-color: white;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  overflow-x: auto;
 }
 
 h1, h2 {
@@ -54,7 +56,7 @@ form {
   align-items: center;
 }
 
-form input {
+form input, #extraHours input {
   margin: 5px;
   padding: 8px;
   width: 250px;
@@ -62,7 +64,7 @@ form input {
   border-radius: 5px;
 }
 
-form button {
+form button, #saveButton, #printButton {
   padding: 10px 20px;
   margin-top: 10px;
   border: none;
@@ -72,6 +74,33 @@ form button {
   border-radius: 5px;
 }
 
-form button:hover {
+form button:hover, #saveButton:hover, #printButton:hover {
   background-color: #45a049;
+}
+
+#extraHours {
+  margin: 20px 0;
+  text-align: center;
+}
+
+#extraHours label {
+  display: block;
+  margin: 5px 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media print {
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .buttons, #extraHours {
+    display: none;
+  }
 }
