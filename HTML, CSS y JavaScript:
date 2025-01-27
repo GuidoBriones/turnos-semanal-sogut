@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turnos Sogut - Registro de Asistencia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        .input-cell {
+            background-color: #f2f2f2;
+        }
+        .input-field {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #218838;
+        }
+        .print-button {
+            background-color: #007bff;
+        }
+        .print-button:hover {
+            background-color: #0056b3;
+        }
+        .share-button {
+            background-color: #ffc107;
+        }
+        .share-button:hover {
+            background-color: #e0a800;
+        }
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 100%;
+                box-shadow: none;
+            }
+            table {
+                width: 100%;
+            }
+            th, td {
+                padding: 10px;
+                text-align: center;
+                border: 1px solid black;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Registro de Turnos Sogut</h1>
+
+        <!-- Mes selector -->
+        <div>
+            <label for="month-select">Mes:</label>
+            <select id="month-select" class="input-field" onchange="updateMonth()">
+                <option value="enero">Enero</option>
+                <option value="febrero">Febrero</option>
+                <option value="marzo">Marzo</option>
+                <option value="abril">Abril</option>
+                <option value="mayo">Mayo</option>
+                <option value="junio">Junio</option>
+                <option value="julio">Julio</option>
+                <option value="agosto">Agosto</option>
+                <option value="septiembre">Septiembre</option>
+                <option value="octubre">Octubre</option>
+                <option value="noviembre">Noviembre</option>
+                <option value="diciembre">Diciembre</option>
+            </select>
+        </div>
+
+        <!-- Tabla de turnos -->
+        <table id="turnos-table">
+            <thead>
+                <tr>
+                    <th>Turnos Sogut</th>
+                    <th>Mes</th>
+                    <th>Nombre</th>
+                    <th>RUT</th>
+                    <th>Lu 1</th>
+                    <th>Ma 2</th>
+                    <th>Mi 3</th>
+                    <th>Ju 4</th>
+                    <th>Vi 5</th>
+                    <th>Sá 6</th>
+                    <th>Do 7</th>
+                    <th>Horas Extras</th>
+                    <th>Total H. Extra</th>
+                    <th>Total Asist.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Turno Sogut">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" id="month" readonly>
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Nombre">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="RUT">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Lu 1">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Ma 2">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Mi 3">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Ju 4">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Vi 5">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Sá 6">
+                    </td>
+                    <td class="input-cell">
+                        <input type="text" class="input-field" placeholder="Do 7">
+                    </td>
+                    <td class="input-cell">
+                        <input type="number" class="input-field" placeholder="Horas Extras">
+                    </td>
+                    <td class="input-cell">
+                        <input type="number" class="input-field" placeholder="Total H. Extra" readonly>
+                    </td>
+                    <td class="input-cell">
+                        <input type="number" class="input-field" placeholder="Total Asist." readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Botones -->
+        <button class="button print-button" onclick="window.print()">Imprimir</button>
+        <button class="button share-button" onclick="shareData()">Compartir</button>
+    </div>
+
+    <script>
+        // Función para actualizar el mes en la tabla
+        function updateMonth() {
+            const monthSelect = document.getElementById("month-select");
+            const month = monthSelect.value;
+            document.getElementById("month").value = month.charAt(0).toUpperCase() + month.slice(1);
+        }
+
+        // Función para compartir los datos (se muestra como un ejemplo simple)
+        function shareData() {
+            let tableData = "";
+            const table = document.getElementById("turnos-table");
+            for (let i = 0; i < table.rows.length; i++) {
+                let row = table.rows[i];
+                for (let j = 0; j < row.cells.length; j++) {
+                    tableData += row.cells[j].innerText + "\t";
+                }
+                tableData += "\n";
+            }
+            alert("Datos listos para compartir:\n" + tableData);
+        }
+
+        // Inicializar el mes
+        updateMonth();
+    </script>
+
+</body>
+</html>
