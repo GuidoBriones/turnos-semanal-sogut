@@ -8,8 +8,12 @@
 </head>
 <body>
   <div class="container">
-    <h1>Registro de Asistencia y Horas Extras</h1>
-    
+    <h1>Registro de Asistencia - Noviembre 2024</h1>
+
+    <div class="month">
+      <span id="monthName"></span>
+    </div>
+
     <table id="attendanceTable">
       <thead>
         <tr>
@@ -17,11 +21,11 @@
           <th>Apellido Paterno</th>
           <th>Apellido Materno</th>
           <th>RUT</th>
-          <th>Horas Extras Feriado</th>
-          <th>Horas Extras Normal</th>
+          <th>Fecha Vencimiento CCTO</th>
+          <th colspan="30" id="daysHeader"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="attendanceRows">
         <!-- Filas de datos dinámicas serán agregadas aquí -->
       </tbody>
     </table>
@@ -32,8 +36,7 @@
       <input type="text" id="lastName" placeholder="Apellido Paterno" required>
       <input type="text" id="motherLastName" placeholder="Apellido Materno" required>
       <input type="text" id="rut" placeholder="RUT" required>
-      <input type="number" id="extraHoliday" placeholder="Horas Extras Feriado" required>
-      <input type="number" id="extraNormal" placeholder="Horas Extras Normal" required>
+      <input type="text" id="expirationDate" placeholder="Fecha Vencimiento CCTO" required>
       <button type="submit">Agregar Registro</button>
     </form>
   </div>
